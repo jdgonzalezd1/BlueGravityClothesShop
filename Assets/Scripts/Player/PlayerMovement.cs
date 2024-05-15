@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     
-    private CustomInput customInput;
+    private CustomInput input;
 
     private Vector2 moveVector; 
 
@@ -17,23 +17,23 @@ public class PlayerMovement : MonoBehaviour
     
     private void Awake()
     {
-        customInput = new CustomInput();
+        input = new CustomInput();
         rb = GetComponent<Rigidbody2D>();
     }
 
 
     private void OnEnable()
     {
-        customInput.Enable();
-        customInput.Player.Movement.performed += OnMovementPerformed;
-        customInput.Player.Movement.canceled += OnMovementCancelled;
+        input.Enable();
+        input.Player.Movement.performed += OnMovementPerformed;
+        input.Player.Movement.canceled += OnMovementCancelled;
     }
 
     private void OnDisable()
     {
-        customInput.Disable();
-        customInput.Player.Movement.performed -= OnMovementPerformed;
-        customInput.Player.Movement.canceled -= OnMovementCancelled;
+        input.Disable();
+        input.Player.Movement.performed -= OnMovementPerformed;
+        input.Player.Movement.canceled -= OnMovementCancelled;
     }
 
     private void FixedUpdate()
