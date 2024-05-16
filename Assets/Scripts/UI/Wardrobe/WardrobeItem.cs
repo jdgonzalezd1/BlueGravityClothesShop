@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WardrobeItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Image clothingIcon;
+
+    [SerializeField]
+    private TextMeshProUGUI clothingName;
+
+    [SerializeField]
+    private TextMeshProUGUI clothingPrice;
+
+    private int itemPrice;
+
+    public void SetItemProperties(Clothes clothingAttributes)
     {
-        
+        clothingIcon.sprite = clothingAttributes.icon;
+        clothingName.text = clothingAttributes.clothingName;
+        clothingPrice.text = $"Price: ${clothingAttributes.price}";
+        itemPrice = int.Parse(clothingAttributes.price);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Sell()
     {
-        
+        PlayerEconomy.Instance.TryObtainMoney(itemPrice);
     }
 }

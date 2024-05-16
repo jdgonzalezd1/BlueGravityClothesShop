@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Wardrobe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private Transform container;
 
-    // Update is called once per frame
-    void Update()
+    private List<ShopItem> equipabbleItems;
+
+    private WardrobeItem[] wardrobeItems;
+
+    private void Awake()
     {
-        
+        equipabbleItems = new List<ShopItem>();
+        wardrobeItems = container.GetComponentsInChildren<WardrobeItem>();
     }
 }

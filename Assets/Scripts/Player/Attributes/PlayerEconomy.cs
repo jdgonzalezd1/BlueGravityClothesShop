@@ -52,6 +52,21 @@ public class PlayerEconomy : MonoBehaviour
         }
     }
 
+    public void TryObtainMoney(int argGainAmount)
+    {
+        if (argGainAmount != 0) 
+        {
+            Money += argGainAmount;
+            UpdateMoney(Money);
+        }
+        else
+        {
+            DialogueBox.Instance.SetTextOnDialogueBox("I won't buy that", "It's old");
+            DialogueBox.Instance.EnableDialogueBox();
+        }
+
+    }
+
 
     public void UpdateMoney(int argAmount)
     {
