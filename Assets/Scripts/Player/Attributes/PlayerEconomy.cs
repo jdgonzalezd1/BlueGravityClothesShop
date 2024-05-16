@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Class to manage player money and economy. Made from scratch
+/// </summary>
 public class PlayerEconomy : MonoBehaviour
 {
     [SerializeField]

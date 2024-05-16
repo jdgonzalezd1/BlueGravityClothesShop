@@ -5,6 +5,12 @@ using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class for dialogue box management. Partially taken from internet
+/// 
+/// Setup taken from: https://www.youtube.com/watch?v=8oTYabhj248
+/// Implementation was partially modified for usage purposes
+/// </summary>
 public class DialogueBox : MonoBehaviour
 {
     [SerializeField]

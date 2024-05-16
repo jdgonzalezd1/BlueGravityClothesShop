@@ -4,6 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that manages equipabble (wardrobe) items. Made from scratch but not implemented.
+/// 
+/// P.D: Yes, I could use an interface for Wardrobe and Shop items. I didn't because
+/// the wardrobe behaviour was being developed in the later stages of the project,
+/// thus, when time was over, it wasn't refactored appropiately.
+/// </summary>
 public class WardrobeItem : MonoBehaviour
 {
     [SerializeField]

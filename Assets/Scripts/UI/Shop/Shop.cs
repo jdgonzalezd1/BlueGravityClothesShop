@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that manages Shop menu. Made from scratch
+/// </summary>
 public class Shop : MonoBehaviour
 {
     [SerializeField]

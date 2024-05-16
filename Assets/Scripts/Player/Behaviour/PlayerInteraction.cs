@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class to manage player interaction. Partially made from scratch.
+/// 
+/// Commented methods offer more information about "authorship"
+/// </summary>
 public class PlayerInteraction : MonoBehaviour
 {
     private CustomInput input;
@@ -38,6 +43,7 @@ public class PlayerInteraction : MonoBehaviour
         CanInteract = false;
     }
 
+    //Input system methods taken from previous projects.
     private void OnEnable()
     {
         input.Enable();
@@ -45,7 +51,7 @@ public class PlayerInteraction : MonoBehaviour
         input.Player.Dialog.performed += _ => OnPlayerDialogInteraction();
     }
 
-
+    //Input system methods taken from previous projects.
     private void OnDisable()
     {
         input.Disable();
@@ -53,11 +59,14 @@ public class PlayerInteraction : MonoBehaviour
         input.Player.Dialog.performed -= _ => OnPlayerDialogInteraction();
 
     }
+
+    //Made from scratch
     private void OnPlayerDialogInteraction()
     {
         DialogueBox.Instance.PassToNextLine();
     }
 
+    //Made from scratch
     private void OnPlayerInteraction()
     {
         if (CanInteract)
@@ -76,6 +85,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    //Made from scratch
     private void OnCollisionEnter2D(Collision2D collision)
     {        
         if (collision.gameObject.GetComponent<IInteractable>() != null)
@@ -93,6 +103,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    //Made from scratch
     private void OnCollisionExit2D(Collision2D collision)
     {
         CanInteract = false;

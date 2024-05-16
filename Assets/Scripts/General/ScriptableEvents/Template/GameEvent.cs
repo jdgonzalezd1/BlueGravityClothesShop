@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Class taken from internet
+/// </summary>
 [CreateAssetMenu(fileName = "seNewGameEvent", menuName = "New Game Event")]
 public class GameEvent : ScriptableObject
 {

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Parent class that implements interacting behaviour. Made from scratch
+/// </summary>
 [RequireComponent(typeof(PolygonCollider2D))]
 public class InteractableObject : MonoBehaviour , IInteractable
 {

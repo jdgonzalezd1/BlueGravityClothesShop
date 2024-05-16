@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class taken from internet
+/// </summary>
 public class GameEventListener : MonoBehaviour
 {
     public GameEvent Event;

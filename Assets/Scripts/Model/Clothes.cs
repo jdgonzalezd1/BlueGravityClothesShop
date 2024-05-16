@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class to define objects characteristics. Made from scratch
+/// </summary>
 [CreateAssetMenu(fileName = "New Clothing", menuName = "Clothes")]
 public class Clothes : ScriptableObject
 {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Interaction for ShopKeeper. Made from scratch
+/// </summary>
 public class ShopKeeper : InteractableObject
 {
     public UnityEvent showShopMenu;

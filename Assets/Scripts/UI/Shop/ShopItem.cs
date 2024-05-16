@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class managing shop items. Made from scratch
+/// </summary>
 public class ShopItem : MonoBehaviour
 {
     [SerializeField]
