@@ -19,7 +19,7 @@ public class ShopItem : MonoBehaviour
     public void SetItemProperties(Clothes clothingAttributes)
     {
         clothingIcon.sprite = clothingAttributes.icon;
-        clothingName.text = clothingAttributes.name;
-        clothingPrice.text = clothingAttributes.price;
+        clothingName.text = clothingAttributes.clothingName;
+        clothingPrice.text = $"Price: ${clothingAttributes.price}";
     }
 }

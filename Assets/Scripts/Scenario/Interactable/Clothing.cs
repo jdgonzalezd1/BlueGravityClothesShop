@@ -7,6 +7,11 @@ public class Clothing : InteractableObject
     [SerializeField]
     private Clothes clothingAttributes;
 
+    public Clothes ClothingAttributes
+    {
+        get { return clothingAttributes; }
+    }
+
     public void LookClothing()
     {
         if (IsInteractingWithPlayer && DialogueBox.Instance.isActiveAndEnabled)
