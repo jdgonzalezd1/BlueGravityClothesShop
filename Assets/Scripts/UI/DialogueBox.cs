@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI dialogueText;
+
+    [SerializeField]
+    private Image shirtIcon;
 
     [SerializeField]
     private string[] lines;
@@ -17,6 +21,7 @@ public class DialogueBox : MonoBehaviour
 
     private int index;
 
+    #region singleton
     public static DialogueBox Instance
     {
         get;
@@ -32,10 +37,11 @@ public class DialogueBox : MonoBehaviour
         else
         {
             Instance = this;
-        }           
-        print(Instance.gameObject.name);
+        }                   
         gameObject.SetActive(false);
     }
+
+    #endregion
 
     private void OnEnable()
     {
@@ -43,15 +49,19 @@ public class DialogueBox : MonoBehaviour
         StartDialogue();
     }
 
+    #region dialog box behaviour
     public void EnableDialogueBox()
-    {
-        print("executing");
+    {        
         if (!gameObject.activeSelf)
         {
             gameObject.SetActive(true);            
         }        
     }
 
+    public void EnableClothingIcon() 
+    { 
+        shirtIcon.gameObject.SetActive(true);
+    }
 
     private void StartDialogue()
     {
@@ -70,6 +80,7 @@ public class DialogueBox : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            shirtIcon.gameObject.SetActive(false);
         }
     }
 
@@ -94,7 +105,18 @@ public class DialogueBox : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
+    #endregion
 
-
+    public void SetClothingProperties(string argClothingName, string argClothingPrice, Sprite argClothingIcon)
+    {
+        StopAllCoroutines();        
+        for (int i = 0; i < lines.Length; i++)
+        {
+            lines[i] = string.Empty;
+        }
+        lines[0] = argClothingName;
+        lines[1] =$"Price: ${argClothingPrice}";
+        shirtIcon.sprite = argClothingIcon;
+    }
 
 }

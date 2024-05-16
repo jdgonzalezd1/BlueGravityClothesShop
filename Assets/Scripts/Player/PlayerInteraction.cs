@@ -13,6 +13,13 @@ public class PlayerInteraction : MonoBehaviour
         get; set;
     }
 
+    private bool InteractingWithClothing
+    {
+        get; set;
+    }
+
+    private InteractableObject currentInteractingObject;
+
     private void Awake()
     {
         input = new CustomInput();
@@ -38,6 +45,14 @@ public class PlayerInteraction : MonoBehaviour
             if (!DialogueBox.Instance.gameObject.activeSelf)
             {
                 DialogueBox.Instance.EnableDialogueBox();
+                if (InteractingWithClothing)
+                {
+                    Clothing tmpClothing = (Clothing)currentInteractingObject;
+                    DialogueBox.Instance.EnableClothingIcon();
+                    tmpClothing.LookClothing();
+                    print("doing something");
+                }
+                print("Executing");
             }
             else
             {
@@ -51,11 +66,17 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.GetComponent<IInteractable>() != null)
         {
             CanInteract = true;
+            if(collision.gameObject.GetComponent<Clothing>() != null)
+            {
+                currentInteractingObject = collision.gameObject.GetComponent<Clothing>();
+                InteractingWithClothing = true;
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         CanInteract = false;
+        InteractingWithClothing = false;
     }
 }
