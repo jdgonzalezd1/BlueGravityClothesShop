@@ -37,8 +37,7 @@ public class DialogueBox : MonoBehaviour
         else
         {
             Instance = this;
-        }                   
-        gameObject.SetActive(false);
+        }                           
     }
 
     #endregion
@@ -117,6 +116,19 @@ public class DialogueBox : MonoBehaviour
         lines[0] = argClothingName;
         lines[1] =$"Price: ${argClothingPrice}";
         shirtIcon.sprite = argClothingIcon;
+    }
+
+    public void SetTextOnDialogueBox(string argTextLine1, string argTextLine2)
+    {        
+        for (int i = 0; i < lines.Length; i++)
+        {
+            lines[i] = string.Empty;
+        }
+
+        lines[0] = argTextLine1;
+        lines[1] = argTextLine2;
+        shirtIcon.gameObject.SetActive(false);
+
     }
 
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -18,7 +19,16 @@ public class PlayerInteraction : MonoBehaviour
         get; set;
     }
 
+    private bool InteractingWithShopKeeper
+    {
+        get; set;
+    }
+
     private InteractableObject currentInteractingObject;
+
+    public UnityEvent interactingAction;
+
+    public UnityEvent interactingWithShopKeeperEvent;
 
     private void Awake()
     {
@@ -30,34 +40,37 @@ public class PlayerInteraction : MonoBehaviour
     {
         input.Enable();
         input.Player.Controller.performed += _ => OnPlayerInteraction();
+        input.Player.Dialog.performed += _ => OnPlayerDialogInteraction();
     }
+
 
     private void OnDisable()
     {
         input.Disable();
         input.Player.Controller.performed -= _ => OnPlayerInteraction();
+        input.Player.Dialog.performed -= _ => OnPlayerDialogInteraction();
+
+    }
+    private void OnPlayerDialogInteraction()
+    {
+        DialogueBox.Instance.PassToNextLine();
     }
 
     private void OnPlayerInteraction()
     {
         if (CanInteract)
         {   
-            if (!DialogueBox.Instance.gameObject.activeSelf)
+            interactingAction.Invoke();            
+            if (InteractingWithClothing)
             {
-                DialogueBox.Instance.EnableDialogueBox();
-                if (InteractingWithClothing)
-                {
-                    Clothing tmpClothing = (Clothing)currentInteractingObject;
-                    DialogueBox.Instance.EnableClothingIcon();
-                    tmpClothing.LookClothing();
-                    print("doing something");
-                }
-                print("Executing");
+                Clothing tmpClothing = (Clothing)currentInteractingObject;
+                DialogueBox.Instance.EnableClothingIcon();
+                tmpClothing.LookClothing();                
             }
-            else
+            else if (InteractingWithShopKeeper)
             {
-                DialogueBox.Instance.PassToNextLine();
-            }
+                interactingWithShopKeeperEvent.Invoke();
+            }            
         }
     }
 
@@ -70,6 +83,9 @@ public class PlayerInteraction : MonoBehaviour
             {
                 currentInteractingObject = collision.gameObject.GetComponent<Clothing>();
                 InteractingWithClothing = true;
+            }else if (collision.gameObject.GetComponent<ShopKeeper>() != null)
+            {
+                InteractingWithShopKeeper = true;
             }
         }
     }
@@ -78,5 +94,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         CanInteract = false;
         InteractingWithClothing = false;
+        InteractingWithShopKeeper = false;
     }
 }

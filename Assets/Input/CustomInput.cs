@@ -44,6 +44,15 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""91156ee5-0375-49e8-9a0d-b1e1b8717ad3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -115,12 +124,12 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""919a1b41-806c-4f89-9e75-7e6bec48d111"",
+                    ""id"": ""f5c819dd-a2e5-45dd-8ee0-0404ff59571b"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Controller"",
+                    ""action"": ""Dialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -133,6 +142,7 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Controller = m_Player.FindAction("Controller", throwIfNotFound: true);
+        m_Player_Dialog = m_Player.FindAction("Dialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,12 +206,14 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Controller;
+    private readonly InputAction m_Player_Dialog;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
         public PlayerActions(@CustomInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Controller => m_Wrapper.m_Player_Controller;
+        public InputAction @Dialog => m_Wrapper.m_Player_Dialog;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -217,6 +229,9 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Controller.started += instance.OnController;
             @Controller.performed += instance.OnController;
             @Controller.canceled += instance.OnController;
+            @Dialog.started += instance.OnDialog;
+            @Dialog.performed += instance.OnDialog;
+            @Dialog.canceled += instance.OnDialog;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -227,6 +242,9 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Controller.started -= instance.OnController;
             @Controller.performed -= instance.OnController;
             @Controller.canceled -= instance.OnController;
+            @Dialog.started -= instance.OnDialog;
+            @Dialog.performed -= instance.OnDialog;
+            @Dialog.canceled -= instance.OnDialog;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -248,5 +266,6 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnController(InputAction.CallbackContext context);
+        void OnDialog(InputAction.CallbackContext context);
     }
 }

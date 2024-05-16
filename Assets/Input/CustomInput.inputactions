@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dialog",
+                    "type": "Button",
+                    "id": "91156ee5-0375-49e8-9a0d-b1e1b8717ad3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -93,12 +102,12 @@
                 },
                 {
                     "name": "",
-                    "id": "919a1b41-806c-4f89-9e75-7e6bec48d111",
+                    "id": "f5c819dd-a2e5-45dd-8ee0-0404ff59571b",
                     "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Controller",
+                    "action": "Dialog",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
