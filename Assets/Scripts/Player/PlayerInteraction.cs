@@ -34,14 +34,20 @@ public class PlayerInteraction : MonoBehaviour
     private void OnPlayerInteraction()
     {
         if (CanInteract)
-        {
-            print("Sure");
+        {   
+            if (!DialogueBox.Instance.gameObject.activeSelf)
+            {
+                DialogueBox.Instance.EnableDialogueBox();
+            }
+            else
+            {
+                DialogueBox.Instance.PassToNextLine();
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print("Hellod");
+    {        
         if (collision.gameObject.GetComponent<IInteractable>() != null)
         {
             CanInteract = true;
@@ -50,6 +56,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        CanInteract = false;   
+        CanInteract = false;
     }
 }
