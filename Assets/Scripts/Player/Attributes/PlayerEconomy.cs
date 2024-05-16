@@ -1,18 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerEconomy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI currentMoney;
+
+    public int Money
     {
-        
+        get; private set;
+    }
+    #region singleton
+    public static PlayerEconomy Instance
+    {
+        get;
+        private set;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    #endregion
+    private void OnEnable()
+    {
+        Money = 150;
+        UpdateMoney(Money);
+    }
+
+    public void TrySpendMoney(int argSpendingAmount)
+    {
+        if (argSpendingAmount < Money)
+        {
+            Money -= argSpendingAmount;
+            UpdateMoney(Money);
+        }
+        else
+        {
+            DialogueBox.Instance.SetTextOnDialogueBox("You don't have enough money", "Come back another time");
+            DialogueBox.Instance.EnableDialogueBox();
+        }
+    }
+
+
+    public void UpdateMoney(int argAmount)
+    {
+        currentMoney.text = argAmount.ToString();
     }
 }

@@ -9,6 +9,8 @@ public class PlayerInteraction : MonoBehaviour
     private CustomInput input;
 
     [SerializeField]
+    private GameObject interactKey;
+
     private bool CanInteract
     {
         get; set;
@@ -79,6 +81,7 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.GetComponent<IInteractable>() != null)
         {
             CanInteract = true;
+            interactKey.SetActive(true);
             if(collision.gameObject.GetComponent<Clothing>() != null)
             {
                 currentInteractingObject = collision.gameObject.GetComponent<Clothing>();
@@ -95,5 +98,6 @@ public class PlayerInteraction : MonoBehaviour
         CanInteract = false;
         InteractingWithClothing = false;
         InteractingWithShopKeeper = false;
+        interactKey.SetActive(false);
     }
 }
